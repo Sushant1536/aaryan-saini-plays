@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Aaryan Saini Plays</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;500;600;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --neon: #00fff7;
+      --neon2: #ff003c;
+      --gold: #ffd700;
+      --dark: #050810;
+      --card: #0c1122;
+      --border: rgba(0,255,247,0.18);
+    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--dark);
+      color: #e0eaff;
+      font-family: 'Rajdhani', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ── ANIMATED BG ── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: 0;
+      background:
+        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(0,255,247,0.12) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 100% 80%, rgba(255,0,60,0.08) 0%, transparent 60%),
+        repeating-linear-gradient(0deg, transparent, transparent 60px, rgba(0,255,247,0.02) 60px, rgba(0,255,247,0.02) 61px),
+        repeating-linear-gradient(90deg, transparent, transparent 60px, rgba(0,255,247,0.02) 60px, rgba(0,255,247,0.02) 61px);
+      pointer-events: none;
+    }
+
+    /* ── NAVBAR ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5%;
+      height: 64px;
+      background: rgba(5,8,16,0.85);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'Orbitron', monospace;
+      font-weight: 900; font-size: 1.1rem;
+      color: var(--neon);
+      text-shadow: 0 0 12px var(--neon);
+      letter-spacing: 2px;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-family: 'Rajdhani', sans-serif; font-weight: 600;
+      font-size: 0.95rem; letter-spacing: 1.5px; text-transform: uppercase;
+      color: #aac; text-decoration: none;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--neon); }
+
+    /* ── HERO ── */
+    #hero {
+      position: relative; z-index: 1;
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      padding: 100px 20px 60px;
+    }
+    .avatar-ring {
+      width: 160px; height: 160px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--neon), var(--neon2), var(--gold));
+      padding: 3px;
+      margin-bottom: 28px;
+      box-shadow: 0 0 40px rgba(0,255,247,0.4), 0 0 80px rgba(255,0,60,0.2);
+      animation: pulseRing 3s ease-in-out infinite;
+    }
+    @keyframes pulseRing {
+      0%,100% { box-shadow: 0 0 40px rgba(0,255,247,0.4), 0 0 80px rgba(255,0,60,0.2); }
+      50%      { box-shadow: 0 0 60px rgba(0,255,247,0.7), 0 0 120px rgba(255,0,60,0.35); }
+    }
+    .avatar-inner {
+      width: 100%; height: 100%; border-radius: 50%;
+      background: linear-gradient(145deg, #0d1f3c, #1a0a2e);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 4rem;
+    }
+    .hero-tag {
+      font-family: 'Orbitron', monospace; font-size: 0.75rem;
+      letter-spacing: 4px; color: var(--neon); text-transform: uppercase;
+      margin-bottom: 10px;
+      animation: fadeDown .8s ease both;
+    }
+    .hero-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3rem, 10vw, 7rem);
+      line-height: 1;
+      background: linear-gradient(90deg, #fff 0%, var(--neon) 50%, var(--gold) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: fadeDown .9s ease .1s both;
+    }
+    .hero-sub {
+      font-size: 1.2rem; font-weight: 600; color: #7fa0c8;
+      letter-spacing: 3px; text-transform: uppercase;
+      margin: 10px 0 28px;
+      animation: fadeDown 1s ease .2s both;
+    }
+    .hero-badges {
+      display: flex; gap: 12px; flex-wrap: wrap; justify-content: center;
+      margin-bottom: 36px;
+      animation: fadeDown 1s ease .3s both;
+    }
+    .badge {
+      padding: 6px 18px; border-radius: 2px;
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    .badge-neon  { background: rgba(0,255,247,0.1); border: 1px solid var(--neon); color: var(--neon); }
+    .badge-red   { background: rgba(255,0,60,0.1);  border: 1px solid var(--neon2); color: var(--neon2); }
+    .badge-gold  { background: rgba(255,215,0,0.1); border: 1px solid var(--gold);  color: var(--gold); }
+    .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; animation: fadeDown 1s ease .4s both; }
+    .btn-primary {
+      padding: 14px 36px; border-radius: 2px;
+      background: linear-gradient(90deg, var(--neon), #00c8c0);
+      color: #050810; font-family: 'Orbitron', monospace;
+      font-weight: 700; font-size: 0.8rem; letter-spacing: 2px;
+      text-decoration: none; border: none; cursor: pointer;
+      box-shadow: 0 0 20px rgba(0,255,247,0.4);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 36px rgba(0,255,247,0.7); }
+    .btn-outline {
+      padding: 14px 36px; border-radius: 2px;
+      background: transparent;
+      color: var(--neon2); font-family: 'Orbitron', monospace;
+      font-weight: 700; font-size: 0.8rem; letter-spacing: 2px;
+      text-decoration: none; border: 1px solid var(--neon2); cursor: pointer;
+      transition: background .2s, transform .2s;
+    }
+    .btn-outline:hover { background: rgba(255,0,60,0.12); transform: translateY(-2px); }
+    @keyframes fadeDown { from { opacity:0; transform:translateY(-20px); } to { opacity:1; transform:translateY(0); } }
+
+    /* ── SECTIONS COMMON ── */
+    section { position: relative; z-index: 1; padding: 90px 5%; }
+    .section-label {
+      font-family: 'Orbitron', monospace; font-size: 0.7rem;
+      letter-spacing: 5px; color: var(--neon); text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      line-height: 1; margin-bottom: 48px;
+      color: #fff;
+    }
+    .section-title span { color: var(--neon); }
+
+    /* ── STATS ── */
+    #stats { background: linear-gradient(180deg, transparent, rgba(0,255,247,0.03)); }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+    .stat-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-top: 2px solid var(--neon);
+      padding: 32px 24px;
+      text-align: center;
+      position: relative; overflow: hidden;
+      transition: transform .25s, border-color .25s;
+    }
+    .stat-card:hover { transform: translateY(-6px); border-color: var(--neon); }
+    .stat-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--neon), transparent);
+    }
+    .stat-icon { font-size: 2rem; margin-bottom: 12px; }
+    .stat-num {
+      font-family: 'Orbitron', monospace; font-size: 2.5rem; font-weight: 900;
+      color: var(--neon); line-height: 1;
+    }
+    .stat-label { font-size: 0.85rem; color: #7fa0c8; letter-spacing: 2px; text-transform: uppercase; margin-top: 6px; }
+
+    /* ── ABOUT ── */
+    #about { max-width: 900px; margin: 0 auto; text-align: center; }
+    .about-text {
+      font-size: 1.2rem; line-height: 1.9; color: #b0c4de;
+      margin-bottom: 36px;
+    }
+    .games-grid {
+      display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;
+    }
+    .game-tag {
+      padding: 8px 20px;
+      background: rgba(0,255,247,0.06);
+      border: 1px solid rgba(0,255,247,0.2);
+      border-radius: 2px;
+      font-size: 0.9rem; font-weight: 600; color: #cde;
+      letter-spacing: 1px;
+      transition: background .2s, color .2s;
+    }
+    .game-tag:hover { background: rgba(0,255,247,0.15); color: var(--neon); }
+
+    /* ── VIDEOS ── */
+    #videos { background: rgba(12,17,34,0.5); }
+    .videos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+    .video-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      overflow: hidden;
+      transition: transform .25s, box-shadow .25s;
+    }
+    .video-card:hover { transform: translateY(-6px); box-shadow: 0 12px 40px rgba(0,255,247,0.12); }
+    .video-thumb {
+      width: 100%; aspect-ratio: 16/9;
+      background: linear-gradient(135deg, #0d1f3c 0%, #1a0a2e 100%);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3.5rem; position: relative; overflow: hidden;
+      cursor: pointer;
+    }
+    .video-thumb::after {
+      content: '▶';
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.5rem; color: rgba(255,255,255,0.9);
+      background: rgba(0,0,0,0.4);
+      opacity: 0; transition: opacity .2s;
+    }
+    .video-card:hover .video-thumb::after { opacity: 1; }
+    .video-info { padding: 18px 20px; }
+    .video-info h3 { font-size: 1rem; font-weight: 700; color: #e0eaff; margin-bottom: 6px; }
+    .video-meta { font-size: 0.8rem; color: #7fa0c8; letter-spacing: 1px; }
+    .video-link {
+      display: block; margin: 12px 20px 18px;
+      padding: 10px; text-align: center;
+      background: rgba(255,0,60,0.1); border: 1px solid var(--neon2);
+      color: var(--neon2); text-decoration: none;
+      font-family: 'Orbitron', monospace; font-size: 0.72rem; letter-spacing: 2px;
+      transition: background .2s;
+    }
+    .video-link:hover { background: rgba(255,0,60,0.25); }
+    .yt-banner {
+      margin-top: 48px; text-align: center;
+      padding: 40px; border: 1px solid rgba(255,0,60,0.3);
+      background: rgba(255,0,60,0.04);
+    }
+    .yt-banner p { color: #aab; margin-bottom: 20px; font-size: 1.1rem; }
+
+    /* ── SOCIAL ── */
+    #social { text-align: center; }
+    .social-grid {
+      display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;
+    }
+    .social-card {
+      display: flex; flex-direction: column; align-items: center; gap: 12px;
+      padding: 32px 40px;
+      background: var(--card); border: 1px solid var(--border);
+      text-decoration: none; color: #e0eaff;
+      transition: transform .25s, border-color .25s, box-shadow .25s;
+      min-width: 160px;
+    }
+    .social-card:hover { transform: translateY(-6px); }
+    .social-card.yt  { border-top: 2px solid #ff0000; }
+    .social-card.yt:hover  { border-color: #ff0000; box-shadow: 0 0 30px rgba(255,0,0,0.2); }
+    .social-card.ig  { border-top: 2px solid #e1306c; }
+    .social-card.ig:hover  { border-color: #e1306c; box-shadow: 0 0 30px rgba(225,48,108,0.2); }
+    .social-card.tw  { border-top: 2px solid #1da1f2; }
+    .social-card.tw:hover  { border-color: #1da1f2; box-shadow: 0 0 30px rgba(29,161,242,0.2); }
+    .social-card.dc  { border-top: 2px solid #5865f2; }
+    .social-card.dc:hover  { border-color: #5865f2; box-shadow: 0 0 30px rgba(88,101,242,0.2); }
+    .social-card.fb  { border-top: 2px solid #1877f2; }
+    .social-card.fb:hover  { border-color: #1877f2; box-shadow: 0 0 30px rgba(24,119,242,0.2); }
+    .social-icon { font-size: 2.5rem; }
+    .social-name { font-family: 'Orbitron', monospace; font-size: 0.75rem; letter-spacing: 2px; }
+    .social-handle { font-size: 0.85rem; color: #7fa0c8; }
+
+    /* ── FOOTER ── */
+    footer {
+      position: relative; z-index: 1;
+      text-align: center; padding: 40px 20px;
+      border-top: 1px solid var(--border);
+      color: #445;
+      font-size: 0.85rem; letter-spacing: 1px;
+    }
+    footer span { color: var(--neon); }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .hero-name { font-size: 3rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav>
+    <div class="nav-logo">ASP</div>
+    <ul class="nav-links">
+      <li><a href="#stats">Stats</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#videos">Videos</a></li>
+      <li><a href="#social">Social</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="avatar-ring">
+      <div class="avatar-inner">🎮</div>
+    </div>
+    <div class="hero-tag">// Content Creator & Gamer</div>
+    <h1 class="hero-name">Aaryan Saini<br>Plays</h1>
+    <p class="hero-sub">All Games · All Platforms · All Day</p>
+    <div class="hero-badges">
+      <span class="badge badge-neon">🎯 Multi-Genre</span>
+      <span class="badge badge-red">🎬 Reels Creator</span>
+      <span class="badge badge-gold">⭐ Growing Creator</span>
+    </div>
+    <div class="hero-btns">
+      <a href="https://youtube.com/@AaryanSainiPlays" target="_blank" class="btn-primary">▶ Watch on YouTube</a>
+      <a href="#about" class="btn-outline">About Me →</a>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section id="stats">
+    <div class="reveal">
+      <div class="section-label">// Performance</div>
+      <div class="section-title">My <span>Numbers</span></div>
+    </div>
+    <div class="stats-grid reveal">
+      <div class="stat-card">
+        <div class="stat-icon">🎮</div>
+        <div class="stat-num">50+</div>
+        <div class="stat-label">Games Played</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">🎬</div>
+        <div class="stat-num">100+</div>
+        <div class="stat-label">Videos Posted</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">📱</div>
+        <div class="stat-num">10K+</div>
+        <div class="stat-label">Reel Views</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">🏆</div>
+        <div class="stat-num">∞</div>
+        <div class="stat-label">Hours Played</div>
+      </div>
+    </div>
+    <p style="text-align:center; color:#556; font-size:0.8rem; margin-top:20px; letter-spacing:1px;">
+      * Update these numbers in the HTML file anytime!
+    </p>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="reveal" style="text-align:center;">
+      <div class="section-label">// Who Am I</div>
+      <div class="section-title">About <span>Me</span></div>
+      <p class="about-text">
+        Hey! I'm <strong style="color:#e0eaff;">Aaryan Saini</strong> — a passionate gamer and content creator who lives and breathes gaming.
+        I play everything — from battle royales and RPGs to indie gems and AAA blockbusters.
+        I post gameplay highlights, funny moments, and viral reels that keep the community entertained.
+        Whether you're here for tips, entertainment, or just good vibes — you're in the right place. Let's game! 🎮
+      </p>
+      <div class="section-label" style="margin-bottom:16px;">// Games I Play</div>
+      <div class="games-grid">
+        <span class="game-tag">🔫 BGMI / PUBG</span>
+        <span class="game-tag">🔥 Story Games</span>
+        <span class="game-tag">🏎️ GTA V</span>
+        <span class="game-tag">🗡️ Minecraft</span>
+        <span class="game-tag">🎯 Valorant</span>
+        <span class="game-tag">⚔️ Call of Duty</span>
+        <span class="game-tag">🌌 & Many More</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- VIDEOS -->
+  <section id="videos">
+    <div class="reveal">
+      <div class="section-label">// Content</div>
+      <div class="section-title">Latest <span>Videos</span></div>
+    </div>
+    <div class="videos-grid reveal">
+      <div class="video-card">
+        <div class="video-thumb">🔫</div>
+        <div class="video-info">
+          <h3>I failed acting Brave in Roblox - The Mimic 😭 | Book 1 Chapter 1!</h3>
+          <div class="video-meta">🎮 The Mimic &nbsp;·&nbsp; 🔥 Top Pick</div>
+        </div>
+        <a href="https://youtu.be/CwO9wwTyu8I?si=C7p3id33PuEf1RR1" target="_blank" class="video-link">▶ WATCH NOW</a>
+      </div>
+      <div class="video-card">
+        <div class="video-thumb">🏎️</div>
+        <div class="video-info">
+          <h3>They asked Me for a Kiss on Ome.tv 💋</h3>
+          <div class="video-meta">🎮 Ome.tv &nbsp;·&nbsp; 😂 Funny Moments</div>
+        </div>
+        <a href="https://youtu.be/uCCOavGdWyQ?si=nMr5urD2N1jZ1Ht8" target="_blank" class="video-link">▶ WATCH NOW</a>
+      </div>
+      <div class="video-card">
+        <div class="video-thumb">🎯</div>
+        <div class="video-info">
+          <h3>Gurgaon's hidden gem - Aravalli Bio Diversity park | Vlog 6</h3>
+          <div class="video-meta">📱 Reels &nbsp;·&nbsp; ⭐ Most Viewed</div>
+        </div>
+        <a href="https://youtu.be/y_LoSpdR9t8?si=qpyG84tyQeKsEUX4" target="_blank" class="video-link">▶ WATCH NOW</a>
+      </div>
+    </div>
+    <div class="yt-banner reveal">
+      <p>🎬 New videos every week — Subscribe so you never miss a drop!</p>
+      <a href="https://youtube.com/@AaryanSainiPlays" target="_blank" class="btn-primary">Subscribe on YouTube</a>
+    </div>
+  </section>
+
+  <!-- SOCIAL -->
+  <section id="social">
+    <div class="reveal">
+      <div class="section-label">// Connect</div>
+      <div class="section-title">Find Me <span>Online</span></div>
+    </div>
+    <div class="social-grid reveal">
+      <a href="https://youtube.com/@AaryanSainiPlays" target="_blank" class="social-card yt">
+        <div class="social-icon">📺</div>
+        <div class="social-name">YouTube</div>
+        <div class="social-handle">@AaryanSainiPlays</div>
+      </a>
+      <a href="https://instagram.com/aaryansainiplays/" target="_blank" class="social-card ig">
+        <div class="social-icon">📸</div>
+        <div class="social-name">Instagram</div>
+        <div class="social-handle">Add your handle</div>
+      </a>
+      <a href="https://twitter.com/" target="_blank" class="social-card tw">
+        <div class="social-icon">🐦</div>
+        <div class="social-name">Twitter / X</div>
+        <div class="social-handle">Add your handle</div>
+      </a>
+      <a href="https://discord.com/invite/CXXWVPnRkf/" target="_blank" class="social-card dc">
+        <div class="social-icon">💬</div>
+        <div class="social-name">Discord</div>
+        <div class="social-handle">Join my server</div>
+      </a>
+      <a href="https://facebook.com/" target="_blank" class="social-card fb">
+        <div class="social-icon">📘</div>
+        <div class="social-name">Facebook</div>
+        <div class="social-handle">Add your page</div>
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>Made with ❤️ by <span>Aaryan Saini Plays</span> &nbsp;·&nbsp; © 2026 &nbsp;·&nbsp; Keep Gaming 🎮</p>
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
